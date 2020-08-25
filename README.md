@@ -27,4 +27,4 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   
  ## :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Rodrigo-Segui//blob/master/LICENSE) para mais detalhes
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Rodrigo-Segui/TRABALHOFINALSO/blob/master/LICENSE) para mais detalhes
