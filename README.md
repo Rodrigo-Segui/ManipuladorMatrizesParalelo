@@ -1,5 +1,4 @@
-# jogo-da-velha
-Implementação em Java
+
 
 <p align="center">
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
