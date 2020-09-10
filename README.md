@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## Começando
 
- 1. Clone esse repositorio ```git clone https://github.com/Rodrigo-Segui/.git```
+ 1. Clone esse repositorio ```git clone https://github.com/Rodrigo-Segui/TrabalhodeSitemasOperacionais.git```
  2. Inicie  com projeto e compile.
   
  ## :memo: Licença
