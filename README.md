@@ -14,8 +14,14 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
  
+Objetivo: Implementar em Java um algoritmo paralelo/concorrente para manipulação de matrizes, conforme detalhamento apresentado a seguir, e comparar seu desempenho contra uma versão sequencial de um algoritmo equivalente (que cumpra o mesmo objetivo, embora usando uma estratégia diferente e possivelmente mais eficiente para o processamento sequencial).
 
-### Backend- FrontEnd
+Detalhamento:
+
+   Sobre o algoritmo
+O algoritmo deve preencher com valores aleatórios (dentro de um intervalo de 1 a 100),  todas as posições da matriz de uma matriz de entrada quadrada com 1 M (mega) posições. O preenchimento deverá ser realizado usando uma dentre duas formas diferentes (ou uma ou outra, de acordo com a seleção do usuário). A primeira forma permite liberdade para estabelecer o padrão de escrita das posições da matriz. Na segunda forma, a ordem de escrita das posições da matriz de entrada deve ser aleatória. Na versão paralela da aplicação, múltiplas threads podem se encarregar de fazer o preenchimento da matriz de entrada de forma paralela/concorrente. 
+Enquanto (ao mesmo tempo em que) a matriz de entrada é preenchida, o programa deve ler os valores atribuídos a cada posição da matriz de entrada e transportá-los para uma matriz de saída. Um valor só pode ser transportado para a matriz de saída depois de efetivamente escrito na matriz de entrada. Na matriz de saída, todos os valores iguais devem ficar alocados, de alguma forma, contiguamente, como exemplificado pela figura 1.
+
 
 
 ## Começando
