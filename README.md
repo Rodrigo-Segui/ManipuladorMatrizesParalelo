@@ -26,9 +26,9 @@ Enquanto (ao mesmo tempo em que) a matriz de entrada é preenchida, o programa d
 
 ## Começando
 
- 1. Clone esse repositorio ```git clone https://github.com/Rodrigo-Segui/ManipuladorMatrizes.git```
+ 1. Clone esse repositorio ```git clone https://github.com/Rodrigo-Segui/ManipuladorMatrizesParalelo.git```
  2. Inicie  com projeto e compile.
   
  ## :memo: Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Rodrigo-Segui/ManipuladorMatrizes/blob/master/LICENSE) para mais detalhes
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Rodrigo-Segui/ManipuladorMatrizesParalelo/blob/master/LICENSE) para mais detalhes
