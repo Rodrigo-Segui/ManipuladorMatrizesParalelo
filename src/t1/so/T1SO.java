@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author pirat
+ * @author author
  */
 public class T1SO {
 
@@ -23,16 +23,24 @@ public class T1SO {
     {
         int i;
         int j;
-        int m[][] = new int[10][10];
+        int m_entrada[][] = new int[10][10];
+        int m_saida[][] = new int[10][10];
+        int n_sorteado;
         Random random = new Random();
-        for(i=0;i<m.length;i++)
+        for(i=0;i<m_entrada.length;i++)
         {
-            for(j=0;j<m[i].length;j++)
+            for(j=0;j<m_entrada[i].length;j++)
             {
-                m[i][j]= random.nextInt(99)+1;
-                System.out.print(m[i][j]+ " ");
+                    n_sorteado = random.nextInt(99)+1;
+                    m_entrada[i][j] = n_sorteado;
+                    Preencha_Matriz(i,j,n_sorteado, m_saida);
+                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                    Printa(m_entrada);
+                    m_entrada[i][j] = 101;
+                    System.out.println("Matriz Entrada Após ser transportada");
+                    Printa(m_entrada);
             }
-            System.out.println();
+            Printa(m_entrada);
         }
     }
     static void PreenchimentoAleatorio()
@@ -41,28 +49,46 @@ public class T1SO {
         int i;
         int j;
         int contador=0;
-        int m[][] = new int[1000][1000];
+        int numero_sorteado = 0;
+        int matriz_entrada[][] = new int[10][10];
+        int matriz_saida[][] = new int[10][10];
         Random random = new Random();
         Random sorteio_linha = new Random();
         Random sorteio_coluna = new Random();
-        while(contador<(m[0].length * m[1].length))
+        while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
         {
-                i = sorteio_linha.nextInt(1000);
-                j = sorteio_coluna.nextInt(1000);
-                teste = Procura(i,j,m);
+                i = sorteio_linha.nextInt(10);
+                j = sorteio_coluna.nextInt(10);
+                teste = Procura(i,j,matriz_entrada);
                 if(teste==true)
                 {
-                    m[i][j]= random.nextInt(99)+1;
+                    numero_sorteado = random.nextInt(99)+1;
+                    matriz_entrada[i][j] = numero_sorteado;
+                    Preencha_Matriz(i,j,numero_sorteado, matriz_saida);
+                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                    Printa(matriz_entrada);
+                    matriz_entrada[i][j] = 101;
+                    System.out.println("Matriz Entrada Após ser transportada");
+                    Printa(matriz_entrada);
                     contador++;
-                    System.out.println("I = " + i + " " +"J = " + j + " " + "M" + m[i][j] + " " + "Contador = " + contador);
-                    //rinta(m);
                 }
-                
-                //System.out.println("I = " + i + " " +"J = " + j + " " + "M" + m[i][j] + " " + "Contador = " + contador);
         }
-        //System.out.println("M.length = " + (m[0].length * m[1].length));
-        Printa(m);
+        System.out.println("Print da Matriz Final de Entrada");
+        Printa(matriz_entrada);
         
+    }
+    static void Preencha_Matriz(int i, int j, int valor,int matriz_saida[][])
+    {
+        
+        boolean teste;
+        teste = Procura(i, j, matriz_saida);
+        if(teste == true)
+        {
+            matriz_saida[i][j] = valor;
+        }
+        //ordena matriz
+        System.out.println("Matriz Saida");
+        Printa(matriz_saida);
     }
     
     static void Printa(int m[][])
