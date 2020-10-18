@@ -22,34 +22,34 @@ public class T1SO {
      * @param args the command line arguments
      */
     
-    static void PreenchimentoLinha()
+    static void PreenchimentoLinhaMatrizEntrada()
     {
         int i;
         int j;
-        int m_entrada[][] = new int[10][10];
-        int m_saida[][] = new int[10][10];
         int n_sorteado;
         Random random = new Random();
-        for(i=0;i<m_entrada.length;i++)
+        for(i=0;i<matriz_entrada.length;i++)
         {
-            for(j=0;j<m_entrada[i].length;j++)
+            for(j=0;j<matriz_entrada[i].length;j++)
             {
                     n_sorteado = random.nextInt(99)+1;
-                    m_entrada[i][j] = n_sorteado;
-                    Preencha_MatrizSaida(i,j,n_sorteado, m_saida);
+                    matriz_entrada[i][j] = n_sorteado;
+                    //Preencha_MatrizSaida(i,j,n_sorteado, matriz_saida);
                     System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    Printa(m_entrada);
-                    m_entrada[i][j] = 404;
-                    System.out.println("Matriz Entrada Após ser transportada");
-                    Printa(m_entrada);
+                    Printa(matriz_entrada);
+                    //matriz_entrada[i][j] = 404;
+                    //System.out.println("Matriz Entrada Após ser transportada");
+                    //Printa(m_entrada);
             }
-            Printa(m_entrada);
+            //Printa(matriz_entrada);
         }
     }
     
     //FUNCÃO PREENCHIMENTO ALEATORIO
     static void PreenchimentoAleatorio()
     {
+        
+        
         boolean teste;
         int linha;
         int coluna;
@@ -70,13 +70,7 @@ public class T1SO {
                 {
                     numero_sorteado = random.nextInt(99)+1;
                     matriz_entrada[linha][coluna] = numero_sorteado;
-                    
-                    
-                    Preencha_MatrizSaida(linha,coluna,numero_sorteado, matriz_saida);
                     System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
-                    Printa(matriz_entrada);
-                    matriz_entrada[linha][coluna] = 404;
-                    System.out.println("Matriz Entrada Após ser transportada");
                     Printa(matriz_entrada);
                     contador++;
                 }
@@ -85,18 +79,23 @@ public class T1SO {
         Printa(matriz_entrada);
         
     }
-    static void Preencha_MatrizSaida(int i, int j, int valor,int matriz_saida[][])
+    static void PreenchimentoMatrizSaida()
     {
         
-        boolean teste;
-        teste = VerificaPosicaoVazia(i, j, matriz_saida);
-        if(teste == true)
+        for(int i=0;i<matriz_entrada.length;i++)
         {
-            matriz_saida[i][j] = valor;
+            for(int j=0;j<matriz_entrada[i].length;j++)
+            {
+                    
+                    matriz_saida[i][j] = matriz_entrada[i][j];
+                    matriz_entrada[i][j] = 0;
+                    System.out.println("Matriz saida Preenchida" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                    Printa(matriz_saida);
+                    System.out.println("Matriz entrada desalocada" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                    Printa(matriz_entrada);
+            }
+            //Printa(matriz_entrada);
         }
-        //ordena matriz
-        System.out.println("Matriz Saida");
-        Printa(matriz_saida);
     }
     
     static void Printa(int m[][])
@@ -142,10 +141,14 @@ public class T1SO {
             escolha = in.nextInt();
             switch(escolha){
                 case 1:
-                    PreenchimentoLinha();
+                    System.out.println("PREENCHENDO MATRIZ ENTRADA");
+                    PreenchimentoLinhaMatrizEntrada();
+                    System.out.println("PREENCHENDO MATRIZ SAIDA");
+                    PreenchimentoMatrizSaida();
                     break;
                 case 2:
                     PreenchimentoAleatorio();
+                    PreenchimentoMatrizSaida();
                     break;
                 case 0:
                     break;
