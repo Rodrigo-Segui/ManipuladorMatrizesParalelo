@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author author
  */
-public class T1SO {
+public class T1SOSEQUENCIAL {
     
     static int matriz_entrada[][] = new int[10][10];
     static int matriz_saida[][] = new int[10][10];
@@ -24,14 +24,16 @@ public class T1SO {
     
     static void PreenchimentoLinhaMatrizEntrada()
     {
-        int i;
-        int j;
+
         int n_sorteado;
         Random random = new Random();
-        for(i=0;i<matriz_entrada.length;i++)
+        System.out.println("NUMBER1 "+ matriz_entrada.length);
+        
+        for(int i=2;i<4;i++)
         {
-            for(j=0;j<matriz_entrada[i].length;j++)
+            for(int j=0;j< matriz_entrada[i].length;j++)
             {
+                    System.out.println("NUMBER2 "+ matriz_entrada[i].length);
                     n_sorteado = random.nextInt(99)+1;
                     matriz_entrada[i][j] = n_sorteado;
                     //Preencha_MatrizSaida(i,j,n_sorteado, matriz_saida);
@@ -147,7 +149,9 @@ public class T1SO {
                     PreenchimentoMatrizSaida();
                     break;
                 case 2:
+                    System.out.println("PREENCHENDO MATRIZ ENTRADA");
                     PreenchimentoAleatorio();
+                    System.out.println("PREENCHENDO MATRIZ SAIDA");
                     PreenchimentoMatrizSaida();
                     break;
                 case 0:
