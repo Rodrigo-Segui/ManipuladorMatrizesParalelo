@@ -5,47 +5,77 @@
  */
 package t1.so;
 
-
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author author
+ * @author user
  */
-public class T1SOSEQUENCIAL {
-    
+
+
+public class SOMatrizesParalelo extends Thread{
     static int matriz_entrada[][] = new int[10][10];
     static int matriz_saida[][] = new int[10][10];
+
+    private int idThread;
+    
+    private Semaphore mutex;
+    public int inlinha;
+    public int outlinha;
+    
+
+    public SOMatrizesParalelo(int id, Semaphore mutex,int inlinha,int outlinha) {
+        this.idThread = id;
+        this.mutex = mutex;
+        this.inlinha = inlinha;
+        this.outlinha = outlinha;
+        start();
+    
+        
+    }
+    
+    
+    
 
     /**
      * @param args the command line arguments
      */
     
-    static void PreenchimentoLinhaMatrizEntrada()
+    void PreenchimentoLinhaMatrizEntrada()
     {
-
-        int n_sorteado;
-        Random random = new Random();
-        System.out.println("NUMBER1 "+ matriz_entrada.length);
-        
-        for(int i=2;i<4;i++)
-        {
-            for(int j=0;j< matriz_entrada[i].length;j++)
-            {
-                    System.out.println("NUMBER2 "+ matriz_entrada[i].length);
-                    n_sorteado = random.nextInt(99)+1;
-                    matriz_entrada[i][j] = n_sorteado;
-                    //Preencha_MatrizSaida(i,j,n_sorteado, matriz_saida);
-                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+       // try{
+           // mutex.acquire(); //SEÇÃO DE ENTRADA
+            ////////////////////////////////////////////////// SEÇÃO CRITICA
+            int n_sorteado;
+            Random random = new Random();
+            for(int i= inlinha ;i< outlinha ;i++)
+                {
+                    for(int j=0;j< 10;j++)
+                        {
+                            n_sorteado = random.nextInt(99)+1;
+                            matriz_entrada[i][j] = n_sorteado;
+                            //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                            //Printa(matriz_entrada);
+   
+                         }
+                    System.out.println("Thread" + inlinha + "" + outlinha);
+                    System.out.println("-----------------------------------");
                     Printa(matriz_entrada);
-                    //matriz_entrada[i][j] = 404;
-                    //System.out.println("Matriz Entrada Após ser transportada");
-                    //Printa(m_entrada);
+                    System.out.println("------------------------------------");
             }
+            System.out.println("Acabou Thread" + inlinha + "" + outlinha);
             //Printa(matriz_entrada);
-        }
     }
+        ////////////////////////////////////////////////// SEÇÃO CRITICA
+       //}catch(InterruptedException e) {} 
+        //finally {
+           // mutex.release();  //SEÇÃO DE SAIDA
+        //}
+     //}
     
     //FUNCÃO PREENCHIMENTO ALEATORIO
     static void PreenchimentoAleatorio()
@@ -128,11 +158,33 @@ public class T1SOSEQUENCIAL {
         }
     }
     
+  
+    public void run(){
+       // try {
+         //   mutex.acquire();
+           // } catch (InterruptedException ex) {
+             //   Logger.getLogger(T1SOPARALELO.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+            //System.out.println("TESTE");
+            PreenchimentoLinhaMatrizEntrada();
+            //mutex.release();
+
+    }
     public static void main(String[] args) 
     {
         
+        System.out.println("PARALELO");
+        
+        Semaphore mutex = new Semaphore(1);
+        //for(int numero_mutex = 0; numero_mutex < 5; numero_mutex ++){
+          //  mutex[numero_mutex] = new Semaphore(1);
+        //}
+        
         int escolha = 0;
-        do{
+        int vet1[] = {0, 2, 4, 6 ,8};
+        int vet2[] = {2, 4, 6, 8 ,10};
+        
+        
             Scanner in = new Scanner(System.in);
             System.out.println("Escolha uma das formas de entrada da matriz." + "");
             System.out.println("1- Preenchimento linha.");
@@ -141,26 +193,31 @@ public class T1SOSEQUENCIAL {
             System.out.println("\n");
             System.out.print("Opção --> ");
             escolha = in.nextInt();
-            switch(escolha){
-                case 1:
+         
+               
                     System.out.println("PREENCHENDO MATRIZ ENTRADA");
-                    PreenchimentoLinhaMatrizEntrada();
-                    System.out.println("PREENCHENDO MATRIZ SAIDA");
-                    PreenchimentoMatrizSaida();
-                    break;
-                case 2:
-                    System.out.println("PREENCHENDO MATRIZ ENTRADA");
-                    PreenchimentoAleatorio();
-                    System.out.println("PREENCHENDO MATRIZ SAIDA");
-                    PreenchimentoMatrizSaida();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opção Invalida");
-                    break;
-            }
-                         
-        }while(escolha != 0);
+                    
+                    //T1SOPARALELO[] processosPreencherMatrizA = new T1SOPARALELO[5];
+                     //processosPreencherMatrizA[0] = new T1SOPARALELO(0,mutex,0, 2);
+                     //processosPreencherMatrizA[1] = new T1SOPARALELO(1,mutex,2, 4);
+                    SOMatrizesSequencial thread1 = new SOMatrizesSequencial(0,mutex,0, 2);
+                    SOMatrizesSequencial thread2 = new SOMatrizesSequencial(1,mutex,2, 4);
+                    SOMatrizesSequencial thread3 = new SOMatrizesSequencial(2,mutex,4, 6);
+                    SOMatrizesSequencial thread4 = new SOMatrizesSequencial(3,mutex,6, 8);
+                    SOMatrizesSequencial thread5 = new SOMatrizesSequencial(4,mutex,8, 10);
+                    
+                    
+                    System.out.println("MATRIZ FINAL");
+                    Printa(matriz_entrada);
+                    
+                    //    for (int i = 0; i < 5; i++) {
+                      //    System.out.println("THREAD" + i);
+                       //     processos[i] = new T1SOPARALELO(i,mutex,vet1[i], vet2[i]);
+                       //     processos[i].run();
+                    //} 
+                
+            
+
+             
   }
     }

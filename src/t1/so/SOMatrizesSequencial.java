@@ -15,10 +15,11 @@ import java.util.logging.Logger;
  *
  * @author user
  */
-static int matriz_entrada[][] = new int[10][10];
-    static int matriz_saida[][] = new int[10][10];
 
-public class T1SOPARALELO extends Thread{
+
+public class SOMatrizesSequencial extends Thread{
+    static int matriz_entrada[][] = new int[10][10];
+    static int matriz_saida[][] = new int[10][10];
 
     private int idThread;
     
@@ -27,7 +28,7 @@ public class T1SOPARALELO extends Thread{
     public int outlinha;
     
 
-    public T1SOPARALELO(int id, Semaphore mutex,int inlinha,int outlinha) {
+    public SOMatrizesSequencial(int id, Semaphore mutex,int inlinha,int outlinha) {
         this.idThread = id;
         this.mutex = mutex;
         this.inlinha = inlinha;
@@ -199,11 +200,11 @@ public class T1SOPARALELO extends Thread{
                     //T1SOPARALELO[] processosPreencherMatrizA = new T1SOPARALELO[5];
                      //processosPreencherMatrizA[0] = new T1SOPARALELO(0,mutex,0, 2);
                      //processosPreencherMatrizA[1] = new T1SOPARALELO(1,mutex,2, 4);
-                    T1SOPARALELO thread1 = new T1SOPARALELO(0,mutex,0, 2);
-                    T1SOPARALELO thread2 = new T1SOPARALELO(1,mutex,2, 4);
-                    T1SOPARALELO thread3 = new T1SOPARALELO(2,mutex,4, 6);
-                    T1SOPARALELO thread4 = new T1SOPARALELO(3,mutex,6, 8);
-                    T1SOPARALELO thread5 = new T1SOPARALELO(4,mutex,8, 10);
+                    SOMatrizesSequencial thread1 = new SOMatrizesSequencial(0,mutex,0, 2);
+                    SOMatrizesSequencial thread2 = new SOMatrizesSequencial(1,mutex,2, 4);
+                    SOMatrizesSequencial thread3 = new SOMatrizesSequencial(2,mutex,4, 6);
+                    SOMatrizesSequencial thread4 = new SOMatrizesSequencial(3,mutex,6, 8);
+                    SOMatrizesSequencial thread5 = new SOMatrizesSequencial(4,mutex,8, 10);
                     
                     
                     System.out.println("MATRIZ FINAL");
