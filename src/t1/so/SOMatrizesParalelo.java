@@ -200,11 +200,12 @@ public class SOMatrizesParalelo extends Thread{
                     //T1SOPARALELO[] processosPreencherMatrizA = new T1SOPARALELO[5];
                      //processosPreencherMatrizA[0] = new T1SOPARALELO(0,mutex,0, 2);
                      //processosPreencherMatrizA[1] = new T1SOPARALELO(1,mutex,2, 4);
-                    SOMatrizesSequencial thread1 = new SOMatrizesSequencial(0,mutex,0, 2);
-                    SOMatrizesSequencial thread2 = new SOMatrizesSequencial(1,mutex,2, 4);
-                    SOMatrizesSequencial thread3 = new SOMatrizesSequencial(2,mutex,4, 6);
-                    SOMatrizesSequencial thread4 = new SOMatrizesSequencial(3,mutex,6, 8);
-                    SOMatrizesSequencial thread5 = new SOMatrizesSequencial(4,mutex,8, 10);
+                     
+                    SOMatrizesParalelo thread1 = new SOMatrizesParalelo(0,mutex,0, 2);
+                    SOMatrizesParalelo thread2 = new SOMatrizesParalelo(1,mutex,2, 4);
+                    SOMatrizesParalelo thread3 = new SOMatrizesParalelo(2,mutex,4, 6);
+                    SOMatrizesParalelo thread4 = new SOMatrizesParalelo(3,mutex,6, 8);
+                    SOMatrizesParalelo thread5 = new SOMatrizesParalelo(4,mutex,8, 10);
                     
                     
                     System.out.println("MATRIZ FINAL");
