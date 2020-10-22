@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class SOMatrizesSequencial {
     
-    static int matriz_entrada[][] = new int[5][5];
-    static int matriz_saida[][] = new int[5][5];
+    static int matriz_entrada[][] = new int[10][10];
+    static int matriz_saida[][] = new int[10][10];
     static int matriz_auxiliar[][] = new int[100][4];
     static int quantidade_posicoes_preenchidas_matriz_auxiliar = 0;
 
@@ -29,17 +29,17 @@ public class SOMatrizesSequencial {
 
         int n_sorteado;
         Random random = new Random();
-        System.out.println("NUMBER1 "+ matriz_entrada.length);
+        //System.out.println("NUMBER1 "+ matriz_entrada.length);
         
         for(int i=0;i<matriz_entrada.length;i++)
         {
             for(int j=0;j< matriz_entrada[i].length;j++)
             {
-                    System.out.println("NUMBER2 "+ matriz_entrada[i].length);
+                    //System.out.println("NUMBER2 "+ matriz_entrada[i].length);
                     n_sorteado = random.nextInt(99)+1;
                     matriz_entrada[i][j] = n_sorteado;
-                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    Printa(matriz_entrada);
+                    //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                   // Printa(matriz_entrada);
                     
             }
             //Printa(matriz_entrada);
@@ -71,13 +71,13 @@ public class SOMatrizesSequencial {
                 {
                     numero_sorteado = random.nextInt(99)+1;
                     matriz_entrada[linha][coluna] = numero_sorteado;
-                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
-                    Printa(matriz_entrada);
+                    //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
+                    //Printa(matriz_entrada);
                     contador++;
                 }
         }
-        System.out.println("Print da Matriz Final de Entrada");
-        Printa(matriz_entrada);
+        //System.out.println("Print da Matriz Final de Entrada");
+        //Printa(matriz_entrada);
         
     }
     static void PreenchimentoMatrizSaida()
@@ -88,15 +88,15 @@ public class SOMatrizesSequencial {
             for(int j=0;j<matriz_entrada[i].length;j++)
             {
                     
-                    posicao = PosicaoPreencher(matriz_entrada[i][j], posicao, i,j);
-                    for(int linha = posicao[0]; linha< matriz_saida.length; linha ++){
-                        for (int coluna = 0; coluna < matriz_saida[linha].length; coluna ++){
+                    //posicao = PosicaoPreencher(matriz_entrada[i][j], posicao, i,j);
+                    //for(int linha = posicao[0]; linha< matriz_saida.length; linha ++){
+                      //  for (int coluna = 0; coluna < matriz_saida[linha].length; coluna ++){
                             
-                        }
+                        //}
                         
-                    }
+                    //}
                     matriz_saida[i][j] = matriz_entrada[i][j];
-                    System.out.println("POSICAO A PREENCHER: " +  matriz_entrada[i][j] + ": " + "linha: "+ posicao[0] + "coluna: "+ posicao[1] );
+                    //System.out.println("POSICAO A PREENCHER: " +  matriz_entrada[i][j] + ": " + "linha: "+ posicao[0] + "coluna: "+ posicao[1] );
                     matriz_entrada[i][j] = 0;
                     
                     //System.out.println("Matriz saida Preenchida" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
@@ -106,7 +106,7 @@ public class SOMatrizesSequencial {
             }
             //Printa(matriz_entrada);
         }
-        Printa(matriz_auxiliar);
+       // Printa(matriz_auxiliar);
     }
     
     static int[] PosicaoPreencher(int valor_a_preencher, int []posicao,int linha_padrao,int coluna_padrao){
@@ -265,18 +265,26 @@ public class SOMatrizesSequencial {
             switch(escolha){
                 case 1:
                     System.out.println("PREENCHENDO MATRIZ ENTRADA");
-                    //PreenchimentoLinhaMatrizEntrada();
-                    PreencherMatrizEntrada();
+                    PreenchimentoLinhaMatrizEntrada();
+                    //PreencherMatrizEntrada();
                     Printa(matriz_entrada);
+                    Printa(matriz_saida);
                     System.out.println("----------------------------------------------------------------------");
                     System.out.println("PREENCHENDO MATRIZ SAIDA");
                     PreenchimentoMatrizSaida();
+                    Printa(matriz_entrada);
+                    Printa(matriz_saida);
                     break;
                 case 2:
                     System.out.println("PREENCHENDO MATRIZ ENTRADA");
+                    
                     PreenchimentoAleatorio();
+                    Printa(matriz_entrada);
+                    Printa(matriz_saida);
                     System.out.println("PREENCHENDO MATRIZ SAIDA");
                     PreenchimentoMatrizSaida();
+                    Printa(matriz_entrada);
+                    Printa(matriz_saida);
                     break;
                 case 0:
                     break;

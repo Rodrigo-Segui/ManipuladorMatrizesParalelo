@@ -20,115 +20,11 @@ import java.util.logging.Logger;
 public class SOMatrizesParalelo extends Thread{
     static int matriz_entrada[][] = new int[10][10];
     static int matriz_saida[][] = new int[10][10];
+    
+    
+    
+ 
 
-    private int idThread;
-    
-    private Semaphore mutex;
-    public int inlinha;
-    public int outlinha;
-    
-
-    public SOMatrizesParalelo(int id, Semaphore mutex,int inlinha,int outlinha) {
-        this.idThread = id;
-        this.mutex = mutex;
-        this.inlinha = inlinha;
-        this.outlinha = outlinha;
-        start();
-    
-        
-    }
-    
-    
-    
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    void PreenchimentoLinhaMatrizEntrada()
-    {
-       // try{
-           // mutex.acquire(); //SEÇÃO DE ENTRADA
-            ////////////////////////////////////////////////// SEÇÃO CRITICA
-            int n_sorteado;
-            Random random = new Random();
-            for(int i= inlinha ;i< outlinha ;i++)
-                {
-                    for(int j=0;j< 10;j++)
-                        {
-                            n_sorteado = random.nextInt(99)+1;
-                            matriz_entrada[i][j] = n_sorteado;
-                            //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                            //Printa(matriz_entrada);
-   
-                         }
-                    System.out.println("Thread" + inlinha + "" + outlinha);
-                    System.out.println("-----------------------------------");
-                    Printa(matriz_entrada);
-                    System.out.println("------------------------------------");
-            }
-            System.out.println("Acabou Thread" + inlinha + "" + outlinha);
-            //Printa(matriz_entrada);
-    }
-        ////////////////////////////////////////////////// SEÇÃO CRITICA
-       //}catch(InterruptedException e) {} 
-        //finally {
-           // mutex.release();  //SEÇÃO DE SAIDA
-        //}
-     //}
-    
-    //FUNCÃO PREENCHIMENTO ALEATORIO
-    static void PreenchimentoAleatorio()
-    {
-        
-        
-        boolean teste;
-        int linha;
-        int coluna;
-        int contador=0;
-        int numero_sorteado = 0;
-        Random random = new Random();
-        Random sorteio_linha = new Random();
-        Random sorteio_coluna = new Random();
-        while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
-        {
-                //sorteia linha e coluna 
-                linha = sorteio_linha.nextInt(10); 
-                coluna = sorteio_coluna.nextInt(10);
-                
-                //verifica se posicao da matriz_entrada esta vazia
-                teste = VerificaPosicaoVazia(linha,coluna,matriz_entrada);
-                if(teste==true)
-                {
-                    numero_sorteado = random.nextInt(99)+1;
-                    matriz_entrada[linha][coluna] = numero_sorteado;
-                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
-                    Printa(matriz_entrada);
-                    contador++;
-                }
-        }
-        System.out.println("Print da Matriz Final de Entrada");
-        Printa(matriz_entrada);
-        
-    }
-    static void PreenchimentoMatrizSaida()
-    {
-        
-        for(int i=0;i<matriz_entrada.length;i++)
-        {
-            for(int j=0;j<matriz_entrada[i].length;j++)
-            {
-                    
-                    matriz_saida[i][j] = matriz_entrada[i][j];
-                    matriz_entrada[i][j] = 0;
-                    System.out.println("Matriz saida Preenchida" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    Printa(matriz_saida);
-                    System.out.println("Matriz entrada desalocada" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    Printa(matriz_entrada);
-            }
-            //Printa(matriz_entrada);
-        }
-    }
     
     static void Printa(int m[][])
     {
@@ -140,50 +36,25 @@ public class SOMatrizesParalelo extends Thread{
             System.out.println();
         }
     }
-            
-    //FUNCAO VERIFICA DE POSICAO DA MATRIZ JA FOI PREENCHIIDA
-    //RETURN TRUE SE POSICAO AINDA NAO FOI PREENCHIDA
-    //RETURN FALSE SE POSICAOJA FOI PREENCHIDA
-    static boolean VerificaPosicaoVazia(int linha, int coluna, int m[][])
-    {
-        int numero = 0;
-        numero = m[linha][coluna];
-        if(numero == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+
     
   
-    public void run(){
-       // try {
-         //   mutex.acquire();
-           // } catch (InterruptedException ex) {
-             //   Logger.getLogger(T1SOPARALELO.class.getName()).log(Level.SEVERE, null, ex);
-            //}
-            //System.out.println("TESTE");
-            PreenchimentoLinhaMatrizEntrada();
-            //mutex.release();
 
-    }
     public static void main(String[] args) 
     {
         
         System.out.println("PARALELO");
-        
-        Semaphore mutex = new Semaphore(1);
-        //for(int numero_mutex = 0; numero_mutex < 5; numero_mutex ++){
-          //  mutex[numero_mutex] = new Semaphore(1);
-        //}
-        
         int escolha = 0;
         int vet1[] = {0, 2, 4, 6 ,8};
         int vet2[] = {2, 4, 6, 8 ,10};
-        
+        Semaphore semaphoreEntrada = new Semaphore(5);
+        Semaphore semaphoreSaida = new Semaphore(5);
+        Semaphore []mutex = new Semaphore[5];
+        mutex[0] = new Semaphore(1); 
+        mutex[1] = new Semaphore(1); 
+        mutex[2] = new Semaphore(1); 
+        mutex[3] = new Semaphore(1); 
+        mutex[4] = new Semaphore(1);
         
             Scanner in = new Scanner(System.in);
             System.out.println("Escolha uma das formas de entrada da matriz." + "");
@@ -193,29 +64,39 @@ public class SOMatrizesParalelo extends Thread{
             System.out.println("\n");
             System.out.print("Opção --> ");
             escolha = in.nextInt();
+           
+                if(escolha == 1){
+                   System.out.println("PREENCHIMENTO PARALELO MATRIZ ENTRADA POR LINHA");                                         
+                   PreenchimentoLinhaMatrizEntrada[] processo1 = new PreenchimentoLinhaMatrizEntrada[5];
+                        for (int i = 0; i < 5; i++) {
+                            processo1[i] = new PreenchimentoLinhaMatrizEntrada("thread preenche matriz entrada",(i + 1), matriz_entrada, vet1[i], vet2[i], semaphoreEntrada, mutex[i]);// 1 2
+                            processo1[i].start();
+                        }
+                        
+                    System.out.println("PREENCHIMENTO PARALELO MATRIZ SAIDA POR LINHA");   
+                    PreenchimentoLinhaMatrizSaida[] processo2 = new PreenchimentoLinhaMatrizSaida[5];
+                        for (int i = 0; i < 5; i++) {
+                            processo2[i] = new PreenchimentoLinhaMatrizSaida("thread preenche matriz saida",(i + 1), matriz_entrada, matriz_saida, vet1[i], vet2[i], semaphoreSaida, mutex[i]);// 1 2
+                            processo2[i].start();
+                        }
+                    
+                        
+                     Printa(matriz_entrada);
+                     Printa(matriz_saida);
+                }
+                if(escolha == 2){
+                   // System.out.println("PREECHIMENTO PARALELO MATRIZ ENTRADA ALEATORIAMENTE");
+                   // PreenchimentoLinhaMatrizEntrada[] processos = new PreenchimentoLinhaMatrizEntrada[5];
+                     //   for (int i = 0; i < 5; i++) {
+                       ///     processos[i] = new PreenchimentoLinhaMatrizEntrada("thread#",(i + 1), matriz_entrada, vet1[i], vet2[i], semaphore, mutex[i]);// 1 2
+                          //  processos[i].start();
+                        //}
+                    
+                    
+                }
+                    
+                    
          
-               
-                    System.out.println("PREENCHENDO MATRIZ ENTRADA");
-                    
-                    //T1SOPARALELO[] processosPreencherMatrizA = new T1SOPARALELO[5];
-                     //processosPreencherMatrizA[0] = new T1SOPARALELO(0,mutex,0, 2);
-                     //processosPreencherMatrizA[1] = new T1SOPARALELO(1,mutex,2, 4);
-                     
-                    SOMatrizesParalelo thread1 = new SOMatrizesParalelo(0,mutex,0, 2);
-                    SOMatrizesParalelo thread2 = new SOMatrizesParalelo(1,mutex,2, 4);
-                    SOMatrizesParalelo thread3 = new SOMatrizesParalelo(2,mutex,4, 6);
-                    SOMatrizesParalelo thread4 = new SOMatrizesParalelo(3,mutex,6, 8);
-                    SOMatrizesParalelo thread5 = new SOMatrizesParalelo(4,mutex,8, 10);
-                    
-                    
-                    System.out.println("MATRIZ FINAL");
-                    Printa(matriz_entrada);
-                    
-                    //    for (int i = 0; i < 5; i++) {
-                      //    System.out.println("THREAD" + i);
-                       //     processos[i] = new T1SOPARALELO(i,mutex,vet1[i], vet2[i]);
-                       //     processos[i].run();
-                    //} 
                 
             
 
