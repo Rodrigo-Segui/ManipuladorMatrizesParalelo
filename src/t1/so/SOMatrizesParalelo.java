@@ -66,14 +66,14 @@ public class SOMatrizesParalelo extends Thread{
             escolha = in.nextInt();
            
                 if(escolha == 1){
-                   System.out.println("PREENCHIMENTO PARALELO MATRIZ ENTRADA POR LINHA");                                         
+                   //System.out.println("PREENCHIMENTO PARALELO MATRIZ ENTRADA POR LINHA");                                         
                    PreenchimentoLinhaMatrizEntrada[] processo1 = new PreenchimentoLinhaMatrizEntrada[5];
                         for (int i = 0; i < 5; i++) {
                             processo1[i] = new PreenchimentoLinhaMatrizEntrada("thread preenche matriz entrada",(i + 1), matriz_entrada, vet1[i], vet2[i], semaphoreEntrada, mutex[i]);// 1 2
                             processo1[i].start();
                         }
                         
-                    System.out.println("PREENCHIMENTO PARALELO MATRIZ SAIDA POR LINHA");   
+                    //System.out.println("PREENCHIMENTO PARALELO MATRIZ SAIDA POR LINHA");   
                     PreenchimentoLinhaMatrizSaida[] processo2 = new PreenchimentoLinhaMatrizSaida[5];
                         for (int i = 0; i < 5; i++) {
                             processo2[i] = new PreenchimentoLinhaMatrizSaida("thread preenche matriz saida",(i + 1), matriz_entrada, matriz_saida, vet1[i], vet2[i], semaphoreSaida, mutex[i]);// 1 2
@@ -81,8 +81,8 @@ public class SOMatrizesParalelo extends Thread{
                         }
                     
                         
-                     Printa(matriz_entrada);
-                     Printa(matriz_saida);
+                     //Printa(matriz_entrada);
+                     //Printa(matriz_saida);
                 }
                 if(escolha == 2){
                    // System.out.println("PREECHIMENTO PARALELO MATRIZ ENTRADA ALEATORIAMENTE");

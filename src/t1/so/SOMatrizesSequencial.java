@@ -6,6 +6,8 @@
 package t1.so;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -15,9 +17,12 @@ import java.util.Random;
  */
 public class SOMatrizesSequencial {
     
-    static int matriz_entrada[][] = new int[10][10];
-    static int matriz_saida[][] = new int[10][10];
+    static int n_linhas= 1000;
+    static int n_colunas = 1000;
+    static int matriz_entrada[][] = new int[n_linhas][n_colunas];
+    static int matriz_saida[][] = new int[n_linhas][n_colunas];
     static int matriz_auxiliar[][] = new int[100][4];
+    static int vet[] = new int[(n_colunas * n_linhas)];
     static int quantidade_posicoes_preenchidas_matriz_auxiliar = 0;
 
     /**
@@ -59,11 +64,13 @@ public class SOMatrizesSequencial {
         Random random = new Random();
         Random sorteio_linha = new Random();
         Random sorteio_coluna = new Random();
+        System.out.println("chegou aqui");
+        System.out.println("--" + matriz_entrada[0].length * matriz_entrada[1].length);
         while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
         {
                 //sorteia linha e coluna 
-                linha = sorteio_linha.nextInt(10); 
-                coluna = sorteio_coluna.nextInt(10);
+                linha = sorteio_linha.nextInt(matriz_entrada[0].length); 
+                coluna = sorteio_coluna.nextInt(matriz_entrada[1].length);
                 
                 //verifica se posicao da matriz_entrada esta vazia
                 teste = VerificaPosicaoVazia(linha,coluna,matriz_entrada);
@@ -72,7 +79,10 @@ public class SOMatrizesSequencial {
                     numero_sorteado = random.nextInt(99)+1;
                     matriz_entrada[linha][coluna] = numero_sorteado;
                     //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
+                    
+                   // System.out.println("------------------------------------------------------------------");
                     //Printa(matriz_entrada);
+                    //System.out.println("----------------------------------------------------------------");
                     contador++;
                 }
         }
@@ -249,9 +259,97 @@ public class SOMatrizesSequencial {
         }
     }
     
+        public static int[]  ConverteMatriz(int m[][])
+    {
+        int vetor [] = new int [(n_colunas * n_linhas)];
+        int indice = 0;
+        for( int x = 0; x < m.length; x++ )
+        {   
+            for( int y = 0; y < m[x].length; y++ )
+            {
+                vetor[indice] = m[x][y];
+                indice = indice + 1;
+            }
+        }
+        return vetor;
+    }
+    
+   static int [][] ConverteVetor (int v[])
+    {
+        int m [][] = new int [n_linhas][n_colunas];
+        int indice = 0;
+        for( int x = 0; x < m.length; x++ )
+        {   
+            for( int y = 0; y < m[x].length; y++ )
+            {
+                m[x][y]= v[indice];
+                indice = indice + 1;
+            }
+        }
+        return m;
+    }
+    
+    public static int [] MergeSort(int vetor[], int posicaoInicio, int posicaoFim) 
+    {
+        int i, j, k, metadeTamanho; 
+        int vetorTemp[] = new int [(n_colunas * n_linhas)];
+        if(posicaoInicio == posicaoFim)
+        {
+           return vetor;
+        }
+        metadeTamanho = (posicaoInicio + posicaoFim ) / 2;
+
+       MergeSort(vetor, posicaoInicio, metadeTamanho);
+       MergeSort(vetor, metadeTamanho + 1, posicaoFim);
+
+        i = posicaoInicio;
+        j = metadeTamanho + 1;
+        k = 0;
+
+    while(i < metadeTamanho + 1 || j  < posicaoFim + 1) {
+        if (i == metadeTamanho + 1 ) { 
+            vetorTemp[k] = vetor[j];
+            j++;
+            k++;
+        }
+        else {
+            if (j == posicaoFim + 1) {
+                vetorTemp[k] = vetor[i];
+                i++;
+                k++;
+            }
+            else {
+                if (vetor[i] < vetor[j]) {
+                    vetorTemp[k] = vetor[i];
+                    i++;
+                    k++;
+                }
+                else {
+                    vetorTemp[k] = vetor[j];
+                    j++;
+                    k++;
+                }
+            }
+        }
+
+    }
+    for(i = posicaoInicio; i <= posicaoFim; i++) {
+        vetor[i] = vetorTemp[i - posicaoInicio];
+    }
+    return vetor;
+}
+    
     public static void main(String[] args) 
     {
         
+        long time1MatrizEntrada;
+        long time2MatrizEntrada;
+        long time1MatrizSaida;
+        long time2MatrizSaida; 
+        long time1Total;
+        long time2Total;
+        long time1MatrizOrdenacao;
+        long time2MatrizOrdenacao; 
         int escolha = 0;
         do{
             Scanner in = new Scanner(System.in);
@@ -264,27 +362,73 @@ public class SOMatrizesSequencial {
             escolha = in.nextInt();
             switch(escolha){
                 case 1:
+                    time1Total = System.currentTimeMillis();
+                    time1MatrizEntrada = System.currentTimeMillis();
                     System.out.println("PREENCHENDO MATRIZ ENTRADA");
                     PreenchimentoLinhaMatrizEntrada();
-                    //PreencherMatrizEntrada();
-                    Printa(matriz_entrada);
-                    Printa(matriz_saida);
-                    System.out.println("----------------------------------------------------------------------");
+                    time2MatrizEntrada = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Matriz Entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
+                    
+                    System.out.println("-----------------------------");
+                    
                     System.out.println("PREENCHENDO MATRIZ SAIDA");
+                    time1MatrizSaida = System.currentTimeMillis();
                     PreenchimentoMatrizSaida();
-                    Printa(matriz_entrada);
+                    time2MatrizSaida = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
+                    System.out.println("------------------------------");
+
+                    //Printa(matriz_entrada);
+                    //Printa(matriz_saida);
+                    time1MatrizOrdenacao = System.currentTimeMillis();
+                    vet = ConverteMatriz(matriz_saida);
+                    //PrintaVet(vet);
+                    vet = MergeSort(vet, 0, ((n_colunas * n_linhas) -1));
+                    matriz_saida = ConverteVetor(vet);
+                    time2MatrizOrdenacao = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Ordenacao:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
+                    
+                    time2Total = System.currentTimeMillis();
+                    
+                    System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
+                    //Printa(matriz_entrada);
                     Printa(matriz_saida);
                     break;
                 case 2:
                     System.out.println("PREENCHENDO MATRIZ ENTRADA");
                     
+                    time1Total = System.currentTimeMillis();
+                    time1MatrizEntrada = System.currentTimeMillis();
                     PreenchimentoAleatorio();
-                    Printa(matriz_entrada);
-                    Printa(matriz_saida);
+                    time2MatrizEntrada = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Matriz Entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
+                    
+                    System.out.println("-----------------------------");
+                    //Printa(matriz_entrada);
+                    //Printa(matriz_saida);
                     System.out.println("PREENCHENDO MATRIZ SAIDA");
+                    time1MatrizSaida = System.currentTimeMillis();
                     PreenchimentoMatrizSaida();
-                    Printa(matriz_entrada);
-                    Printa(matriz_saida);
+                    time2MatrizSaida = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
+                    System.out.println("--------------------------------");
+                    
+
+                    //Printa(matriz_entrada);
+                    //Printa(matriz_saida);
+                    time1MatrizOrdenacao = System.currentTimeMillis();
+                    vet = ConverteMatriz(matriz_saida);
+                    //PrintaVet(vet);
+                    vet = MergeSort(vet, 0, ((n_colunas * n_linhas) -1));
+                    matriz_saida = ConverteVetor(vet);
+                    time2MatrizOrdenacao = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Ordenacao:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
+                    //Printa(matriz_saida);
+                    time2Total = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
+                   // Printa(matriz_entrada);
+                    System.out.println("-----------------");
+                    //Printa(matriz_saida);
                     break;
                 case 0:
                     break;

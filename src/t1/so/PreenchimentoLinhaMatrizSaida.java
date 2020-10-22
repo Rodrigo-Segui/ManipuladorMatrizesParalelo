@@ -61,11 +61,11 @@ public class PreenchimentoLinhaMatrizSaida extends Thread{
             semaphore.acquire();
             mutex.acquire();
             
-            //System.out.println(nome +""+ num_thread + " Iniciou");
+            System.out.println(nome +""+ num_thread + "   Iniciou");
             PreenchimentoLinhaMatrizSaida();
           
             
-            //System.out.println(nome +""+ num_thread + " Terminou");
+            System.out.println(nome +""+ num_thread + "   Terminou");
         } catch(InterruptedException e){
             e.printStackTrace();
         }finally{
