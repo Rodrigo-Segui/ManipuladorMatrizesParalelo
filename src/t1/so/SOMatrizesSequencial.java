@@ -92,31 +92,16 @@ public class SOMatrizesSequencial {
     }
     static void PreenchimentoMatrizSaida()
     {
-        int posicao[] = new int[2];
         for(int i=0;i<matriz_entrada.length;i++)
         {
             for(int j=0;j<matriz_entrada[i].length;j++)
             {
-                    
-                    //posicao = PosicaoPreencher(matriz_entrada[i][j], posicao, i,j);
-                    //for(int linha = posicao[0]; linha< matriz_saida.length; linha ++){
-                      //  for (int coluna = 0; coluna < matriz_saida[linha].length; coluna ++){
-                            
-                        //}
-                        
-                    //}
                     matriz_saida[i][j] = matriz_entrada[i][j];
-                    //System.out.println("POSICAO A PREENCHER: " +  matriz_entrada[i][j] + ": " + "linha: "+ posicao[0] + "coluna: "+ posicao[1] );
                     matriz_entrada[i][j] = 0;
-                    
-                    //System.out.println("Matriz saida Preenchida" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    //Printa(matriz_saida);
-                    //System.out.println("Matriz entrada desalocada" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    //Printa(matriz_entrada);
             }
-            //Printa(matriz_entrada);
+
         }
-       // Printa(matriz_auxiliar);
+ 
     }
     
     static int[] PosicaoPreencher(int valor_a_preencher, int []posicao,int linha_padrao,int coluna_padrao){
@@ -363,30 +348,30 @@ public class SOMatrizesSequencial {
             switch(escolha){
                 case 1:
                     time1Total = System.currentTimeMillis();
-                    time1MatrizEntrada = System.currentTimeMillis();
-                    System.out.println("PREENCHENDO MATRIZ ENTRADA");
+                    //time1MatrizEntrada = System.currentTimeMillis();
+                    //System.out.println("PREENCHENDO MATRIZ ENTRADA");
                     PreenchimentoLinhaMatrizEntrada();
-                    time2MatrizEntrada = System.currentTimeMillis();
-                    System.out.println("Tempo de Execução Matriz Entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
+                    //time2MatrizEntrada = System.currentTimeMillis();
+                    ///System.out.println("Tempo de Execução Matriz Entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
                     
-                    System.out.println("-----------------------------");
+                    //System.out.println("-----------------------------");
                     
-                    System.out.println("PREENCHENDO MATRIZ SAIDA");
-                    time1MatrizSaida = System.currentTimeMillis();
+                    //System.out.println("PREENCHENDO MATRIZ SAIDA");
+                    //time1MatrizSaida = System.currentTimeMillis();
                     PreenchimentoMatrizSaida();
-                    time2MatrizSaida = System.currentTimeMillis();
-                    System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
-                    System.out.println("------------------------------");
+                    //time2MatrizSaida = System.currentTimeMillis();
+                    //System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
+                    //System.out.println("------------------------------");
 
                     //Printa(matriz_entrada);
                     //Printa(matriz_saida);
-                    time1MatrizOrdenacao = System.currentTimeMillis();
-                    vet = ConverteMatriz(matriz_saida);
+                    //time1MatrizOrdenacao = System.currentTimeMillis();
+                    //vet = ConverteMatriz(matriz_saida);
                     //PrintaVet(vet);
-                    vet = MergeSort(vet, 0, ((n_colunas * n_linhas) -1));
-                    matriz_saida = ConverteVetor(vet);
-                    time2MatrizOrdenacao = System.currentTimeMillis();
-                    System.out.println("Tempo de Execução Ordenacao:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
+                    //vet = MergeSort(vet, 0, ((n_colunas * n_linhas) -1));
+                    //matriz_saida = ConverteVetor(vet);
+                    //time2MatrizOrdenacao = System.currentTimeMillis();
+                    //System.out.println("Tempo de Execução Ordenacao:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
                     
                     time2Total = System.currentTimeMillis();
                     

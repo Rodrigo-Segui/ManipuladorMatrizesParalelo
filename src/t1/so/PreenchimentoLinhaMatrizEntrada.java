@@ -79,11 +79,25 @@ public class PreenchimentoLinhaMatrizEntrada extends Thread {
      //}
     
     public void run(){
+        
         try{
             semaphore.acquire();
             mutex.acquire();
             System.out.println(nome +""+ num_thread + " Iniciou");
-            PreenchimentoLinhaMatrizEntrada();
+            //PreenchimentoLinhaMatrizEntrada();
+            int n_sorteado;
+            Random random = new Random();
+            for(int i= inlinha ;i< outlinha ;i++)
+                {
+                    for(int j=0;j< matriz_entrada[i].length;j++)
+                        {
+                            n_sorteado = random.nextInt(99)+1;
+                            matriz_entrada[i][j] = n_sorteado;
+                            //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
+                           // Printa(matriz_entrada);
+   
+                         }
+                }
             
             System.out.println(nome +""+ num_thread + " Terminou");
         } catch(InterruptedException e){

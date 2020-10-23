@@ -47,12 +47,8 @@ public class PreenchimentoLinhaMatrizSaida extends Thread{
                     
                     matriz_saida[i][j] = matriz_entrada[i][j];
                     matriz_entrada[i][j] = 0;
-                    //System.out.println("Matriz saida Preenchida" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                   // Printa(matriz_saida);
-                    //System.out.println("Matriz entrada desalocada" +" "+ "Numero inserido na matriz = " + " " + matriz_entrada[i][j]  + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                    //Printa(matriz_entrada);
             }
-            //Printa(matriz_entrada);
+           
         }
     }
    
@@ -62,7 +58,16 @@ public class PreenchimentoLinhaMatrizSaida extends Thread{
             mutex.acquire();
             
             System.out.println(nome +""+ num_thread + "   Iniciou");
-            PreenchimentoLinhaMatrizSaida();
+            for(int i=inlinha;i<outlinha;i++)
+            {
+                for(int j=0;j<matriz_entrada[i].length;j++)
+                    {
+                    
+                    matriz_saida[i][j] = matriz_entrada[i][j];
+                    matriz_entrada[i][j] = 0;
+                    }
+           
+            }
           
             
             System.out.println(nome +""+ num_thread + "   Terminou");

@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package t1.so;
 
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author user
- */
 
 
 public class SOMatrizesParalelo extends Thread{
-    static int matriz_entrada[][] = new int[10][10];
-    static int matriz_saida[][] = new int[10][10];
     
     
+    static int n_linhas= 1000;
+    static int n_colunas = 1000;
+    static int matriz_entrada[][] = new int[n_linhas][n_colunas];
+    static int matriz_saida[][] = new int[n_linhas][n_colunas];
     
  
 
@@ -45,16 +36,16 @@ public class SOMatrizesParalelo extends Thread{
         
         System.out.println("PARALELO");
         int escolha = 0;
-        int vet1[] = {0, 2, 4, 6 ,8};
-        int vet2[] = {2, 4, 6, 8 ,10};
+        int vet1[] = {0, 200, 400, 600 ,800};
+        int vet2[] = {200, 400, 600, 800 ,1000};
+        long time1Total;
+        long time2Total;
         Semaphore semaphoreEntrada = new Semaphore(5);
         Semaphore semaphoreSaida = new Semaphore(5);
         Semaphore []mutex = new Semaphore[5];
-        mutex[0] = new Semaphore(1); 
-        mutex[1] = new Semaphore(1); 
-        mutex[2] = new Semaphore(1); 
-        mutex[3] = new Semaphore(1); 
-        mutex[4] = new Semaphore(1);
+        for (int k= 0; k < 5; k++){
+            mutex[k] = new Semaphore(1);
+        } 
         
             Scanner in = new Scanner(System.in);
             System.out.println("Escolha uma das formas de entrada da matriz." + "");
@@ -66,6 +57,8 @@ public class SOMatrizesParalelo extends Thread{
             escolha = in.nextInt();
            
                 if(escolha == 1){
+                    time1Total = System.currentTimeMillis();
+                    
                    //System.out.println("PREENCHIMENTO PARALELO MATRIZ ENTRADA POR LINHA");                                         
                    PreenchimentoLinhaMatrizEntrada[] processo1 = new PreenchimentoLinhaMatrizEntrada[5];
                         for (int i = 0; i < 5; i++) {
@@ -80,26 +73,16 @@ public class SOMatrizesParalelo extends Thread{
                             processo2[i].start();
                         }
                     
-                        
+                     System.out.println("tempo Total");
+                     time2Total = System.currentTimeMillis();
+                     System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
                      //Printa(matriz_entrada);
                      //Printa(matriz_saida);
                 }
                 if(escolha == 2){
-                   // System.out.println("PREECHIMENTO PARALELO MATRIZ ENTRADA ALEATORIAMENTE");
-                   // PreenchimentoLinhaMatrizEntrada[] processos = new PreenchimentoLinhaMatrizEntrada[5];
-                     //   for (int i = 0; i < 5; i++) {
-                       ///     processos[i] = new PreenchimentoLinhaMatrizEntrada("thread#",(i + 1), matriz_entrada, vet1[i], vet2[i], semaphore, mutex[i]);// 1 2
-                          //  processos[i].start();
-                        //}
-                    
+         
                     
                 }
                     
-                    
-         
-                
-            
-
-             
-  }
+        }
     }
