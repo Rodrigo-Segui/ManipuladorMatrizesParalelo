@@ -6,8 +6,6 @@
 package t1.so;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.Random;
 
