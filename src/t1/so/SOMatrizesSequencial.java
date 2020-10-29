@@ -22,6 +22,7 @@ public class SOMatrizesSequencial {
     static int matriz_auxiliar[][] = new int[100][4];
     static int vet[] = new int[(n_colunas * n_linhas)];
     static int quantidade_posicoes_preenchidas_matriz_auxiliar = 0;
+    static String alunoRecebido = "12";
 
     /**
      * @param args the command line arguments
@@ -32,20 +33,15 @@ public class SOMatrizesSequencial {
 
         int n_sorteado;
         Random random = new Random();
-        //System.out.println("NUMBER1 "+ matriz_entrada.length);
         
         for(int i=0;i<matriz_entrada.length;i++)
         {
             for(int j=0;j< matriz_entrada[i].length;j++)
             {
-                    //System.out.println("NUMBER2 "+ matriz_entrada[i].length);
                     n_sorteado = random.nextInt(99)+1;
                     matriz_entrada[i][j] = n_sorteado;
-                    //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + n_sorteado + " " + "Linha = " + " " + i + " " + "coluna = " + j);
-                   // Printa(matriz_entrada);
                     
             }
-            //Printa(matriz_entrada);
         }
     }
     
@@ -76,16 +72,9 @@ public class SOMatrizesSequencial {
                 {
                     numero_sorteado = random.nextInt(99)+1;
                     matriz_entrada[linha][coluna] = numero_sorteado;
-                    //System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
-                    
-                   // System.out.println("------------------------------------------------------------------");
-                    //Printa(matriz_entrada);
-                    //System.out.println("----------------------------------------------------------------");
                     contador++;
                 }
         }
-        //System.out.println("Print da Matriz Final de Entrada");
-        //Printa(matriz_entrada);
         
     }
     static void PreenchimentoMatrizSaida()
@@ -333,6 +322,15 @@ public class SOMatrizesSequencial {
         long time2Total;
         long time1MatrizOrdenacao;
         long time2MatrizOrdenacao; 
+        String substring1 = alunoRecebido.substring(0,1);
+        String substring2 = alunoRecebido.substring(1,2);
+        System.out.println(" " + substring1);
+        System.out.println(" " + substring2);
+        int n1 = Integer.parseInt(substring1);
+        int n2 = Integer.parseInt(substring2);
+        int num = n1 + n2;
+        System.out.println("RESULTADO" + num);
+        
         int escolha = 0;
         do{
             Scanner in = new Scanner(System.in);
