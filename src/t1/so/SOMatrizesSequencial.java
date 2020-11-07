@@ -18,8 +18,8 @@ import java.util.Random;
  */
 public class SOMatrizesSequencial {
     
-    static int n_linhas= 1000;
-    static int n_colunas = 1000;
+    static int n_linhas= 10;
+    static int n_colunas = 10;
     static int matriz_entrada[][] = new int[n_linhas][n_colunas];
     static int matriz_saida[][] = new int[n_linhas][n_colunas];
     static List<String> vetor_auxiliar = new ArrayList<String>();
@@ -409,7 +409,7 @@ public class SOMatrizesSequencial {
                     time2Total = System.currentTimeMillis();
                     System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
                     
-                    
+                    System.out.println("terminou");
                     time3Total = System.currentTimeMillis();
                     PreencheVetorAuxiliarAleatorio();
                     
