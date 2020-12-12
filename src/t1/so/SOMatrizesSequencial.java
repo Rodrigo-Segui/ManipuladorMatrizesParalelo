@@ -1,32 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package t1.so;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Scanner;
 import java.util.Random;
 
-/**
- *
- * @author author
- */
+
+
 public class SOMatrizesSequencial {
     
-    static int n_linhas= 10;
-    static int n_colunas = 10;
+ 
+    static int n_linhas= 1000;
+    static int n_colunas = 1000;
     static int matriz_entrada[][] = new int[n_linhas][n_colunas];
     static int matriz_saida[][] = new int[n_linhas][n_colunas];
-    static List<String> vetor_auxiliar = new ArrayList<String>();
-    static int matriz_auxiliar[][] = new int[100][4];
     static int vet[] = new int[(n_colunas * n_linhas)];
     static int quantidade_posicoes_preenchidas_matriz_auxiliar = 0;
-    static String alunoRecebido = "12";
 
     /**
      * @param args the command line arguments
@@ -37,178 +27,94 @@ public class SOMatrizesSequencial {
 
         int n_sorteado;
         Random random = new Random();
+       
         
         for(int i=0;i<matriz_entrada.length;i++)
         {
             for(int j=0;j< matriz_entrada[i].length;j++)
             {
+                  
                     n_sorteado = random.nextInt(99)+1;
                     matriz_entrada[i][j] = n_sorteado;
+                   
                     
             }
+         
         }
     }
-    
-//FUNCÃO PREENCHIMENTO ALEATORIO
+    //FUNCÃO PREENCHIMENTO ALEATORIO
     static void PreenchimentoAleatorio()
     {
         
         
         boolean teste;
-        int linha;
-        int coluna;
+        int linha=0;
+        int coluna =0;
         int contador=0;
         int numero_sorteado = 0;
+        int indice = 0;
+        int indice_coluna = 0;
         Random random = new Random();
-        Random sorteio_linha = new Random();
-        Random sorteio_coluna = new Random();
-        //System.out.println("chegou aqui");
-        //System.out.println("--" + matriz_entrada[0].length * matriz_entrada[1].length);
-        while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
+        int linha_vet[] = new int [n_linhas];
+        int coluna_vet[] = new int [n_linhas];
+        for(int w=0;w<linha_vet.length;w++)
         {
-                //sorteia linha e coluna 
-                linha = sorteio_linha.nextInt(matriz_entrada[0].length); 
-                coluna = sorteio_coluna.nextInt(matriz_entrada[1].length);
-                
-                //verifica se posicao da matriz_entrada esta vazia
-                teste = VerificaPosicaoVazia(linha,coluna,matriz_entrada);
-                if(teste==true)
-                {
+            linha_vet[w] = w;
+            coluna_vet[w] = w;
+        }
+        
+        
+        linha_vet = shuffle(linha_vet);
+        coluna_vet = shuffle(coluna_vet);
+       
+      
+        for(int u=0;u<n_linhas;u++)
+        {
+            for(int t=0;t<n_linhas;t++)
+            {
                     numero_sorteado = random.nextInt(99)+1;
-                    matriz_entrada[linha][coluna] = numero_sorteado;
-                    //System.out.println("preencheu: " + contador);
-                    contador++;
-                }
+                    matriz_entrada[linha_vet[u]][coluna_vet[t]] = numero_sorteado;
+                    
+                    
+            }
+         
         }
         
     }
-    static void PreenchimentoAleatorioVetorAuxiliar()
-    {
-        
+     public static int[] shuffle(int[] a) {
+        Random rnd = new Random();
+        for (int i = a.length - 1; i > 0; i--) {
+            int randomNumber = rnd.nextInt(i + 1);
+            swap(a, i, randomNumber);
+        }
+        return a;
+    }
+ 
 
-        int linha;
-        int coluna;
-        int contador=0;
-        int numero_sorteado = 0;
-        String substring;
-        Random random = new Random();
-        String substring1;
-        String substring2;
-   
-     
-        while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
-        {
-  
-                    substring = vetor_auxiliar.remove(0);
-                    substring1 = substring.substring(0,1);
-                    substring2 = substring.substring(1,2);
-                    linha = Integer.parseInt(substring1);
-                    coluna = Integer.parseInt(substring2);
-                    numero_sorteado = random.nextInt(99)+1;
-                    matriz_saida[linha][coluna] = numero_sorteado;
-                    //System.out.println("preencheu: " + contador);
-                    contador++;
-                    //Printa(matriz_entrada);
-              
-        }
-        
+    public static void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
+    
     static void PreenchimentoMatrizSaida()
     {
+        int posicao[] = new int[2];
         for(int i=0;i<matriz_entrada.length;i++)
         {
             for(int j=0;j<matriz_entrada[i].length;j++)
             {
+                    
+                  
                     matriz_saida[i][j] = matriz_entrada[i][j];
+                   
                     matriz_entrada[i][j] = 0;
+                    
+                    
             }
-
         }
- 
     }
-    
-    static int[] PosicaoPreencher(int valor_a_preencher, int []posicao,int linha_padrao,int coluna_padrao){
-        int numero, quantidade, posicao_inicial_linha, posicao_inicial_coluna;
-        boolean valor_existente = false;
-        posicao[0] = -1;
-        posicao[1] = -1;   
-        
-        //VERIFICA 
-        for(int linha=0;linha<matriz_auxiliar.length;linha++)
-        {
-            for(int coluna=0;coluna < matriz_auxiliar[linha].length;coluna++)
-            {
-                if(valor_a_preencher == matriz_auxiliar[linha][0]){
-                    
-                    valor_existente = true;
-                    System.out.println("VALOR EXISTENTE" + valor_existente);
-                    numero = matriz_auxiliar[linha][0];
-                    quantidade = matriz_auxiliar[linha][1];
-                    posicao_inicial_linha = matriz_auxiliar[linha][2];
-                    posicao_inicial_coluna = matriz_auxiliar[linha][3];
-                    posicao[1] = posicao_inicial_coluna;
-                    posicao[0] = posicao_inicial_linha;
-                    
-                    
-                    for(int y= 0; y < quantidade; y ++){
-                        posicao[1] ++;
-                        if(posicao[1] == matriz_saida.length){
-                            posicao[1] = 0;
-                            posicao[0] = posicao[0] + 1;
-                            
-                        }else{
-                            posicao[0] = posicao_inicial_linha;
-                            
-                        }
-                    }
-                    
-                   matriz_auxiliar[linha][1] = quantidade + 1;
-                   break;
-                    
-            }
-                
-                
-                
-            }
-        }
-        System.out.println("VALOR EXISTENTE" + valor_existente);
-        
-        if(valor_existente == false){ // verifica posicao a ser inseridade e atualiza matriz auxiliar
-            // 0 1 2 3 4
-            System.out.println("TEXTO :" + quantidade_posicoes_preenchidas_matriz_auxiliar);
-            matriz_auxiliar[quantidade_posicoes_preenchidas_matriz_auxiliar][0] = valor_a_preencher;
-            matriz_auxiliar[quantidade_posicoes_preenchidas_matriz_auxiliar][1] = 1;
-            matriz_auxiliar[quantidade_posicoes_preenchidas_matriz_auxiliar][2] = linha_padrao;
-            matriz_auxiliar[quantidade_posicoes_preenchidas_matriz_auxiliar][3] = coluna_padrao;
-            posicao[0] = linha_padrao;
-            posicao[1] = coluna_padrao;
-            
-            quantidade_posicoes_preenchidas_matriz_auxiliar = quantidade_posicoes_preenchidas_matriz_auxiliar +1;
-            
-        
-        }
-        
-        //ATUALIZANDO TABELA APOS Modificacao
-        
-        for(int indicelinhatabela = (quantidade_posicoes_preenchidas_matriz_auxiliar + 1);indicelinhatabela < matriz_auxiliar.length; indicelinhatabela ++){
-            for(int indicecolunatabela = 0;indicecolunatabela < matriz_auxiliar.length; indicecolunatabela ++ ){
-                    if(matriz_auxiliar[indicelinhatabela][0] != 0){
-                        matriz_auxiliar[indicelinhatabela][3] ++;
-                            if(matriz_auxiliar[indicelinhatabela][3] >= matriz_saida.length){
-                                matriz_auxiliar[indicelinhatabela][3] = 0;
-                                matriz_auxiliar[indicelinhatabela][2] ++;
-                                
-                            }
-                        
-                    }
-                
-            }
-        }
-        
-        //codigo retorna posicao que o numero deve ser preenchido na matriz de saida
-    
-        return posicao;
-    }
+  
     static void Printa(int m[][])
     {   
         
@@ -221,51 +127,7 @@ public class SOMatrizesSequencial {
         }
     }
     
-    static void PreencherMatrizEntrada(){
-         matriz_entrada[0][0] = 13; 
-         matriz_entrada[0][1] = 73; 
-         matriz_entrada[0][2] = 58;
-         matriz_entrada[0][3] = 95;
-         matriz_entrada[0][4] = 95;
-         matriz_entrada[1][0] = 85;
-         matriz_entrada[1][1] = 4;
-         matriz_entrada[1][2] = 31;
-         matriz_entrada[1][3] = 96;
-         matriz_entrada[1][4] = 97;
-         matriz_entrada[2][0] = 79;
-         matriz_entrada[2][1] = 80;
-         matriz_entrada[2][2] = 44;
-         matriz_entrada[2][3] = 79;
-         matriz_entrada[2][4] = 8;
-         matriz_entrada[3][0] = 83;
-         matriz_entrada[3][1] = 9;
-         matriz_entrada[3][2] = 87;
-         matriz_entrada[3][3] = 76;
-         matriz_entrada[3][4] = 83;
-         matriz_entrada[4][0] = 32;
-         matriz_entrada[4][1] = 78;
-         matriz_entrada[4][2] = 99;
-         matriz_entrada[4][3] = 22;
-         matriz_entrada[4][4] = 40;
-
-    }
             
-    //FUNCAO VERIFICA DE POSICAO DA MATRIZ JA FOI PREENCHIIDA
-    //RETURN TRUE SE POSICAO AINDA NAO FOI PREENCHIDA
-    //RETURN FALSE SE POSICAOJA FOI PREENCHIDA
-    static boolean VerificaPosicaoVazia(int linha, int coluna, int m[][])
-    {
-        int numero = 0;
-        numero = m[linha][coluna];
-        if(numero == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     
         public static int[]  ConverteMatriz(int m[][])
     {
@@ -296,91 +158,78 @@ public class SOMatrizesSequencial {
         }
         return m;
     }
-    
-    public static int [] MergeSort(int vetor[], int posicaoInicio, int posicaoFim) 
-    {
-        int i, j, k, metadeTamanho; 
-        int vetorTemp[] = new int [(n_colunas * n_linhas)];
-        if(posicaoInicio == posicaoFim)
-        {
-           return vetor;
-        }
-        metadeTamanho = (posicaoInicio + posicaoFim ) / 2;
+    public static int[] MergeSort(int[] array, int low, int high) {
+    if (high <= low) 
+        return array;
 
-       MergeSort(vetor, posicaoInicio, metadeTamanho);
-       MergeSort(vetor, metadeTamanho + 1, posicaoFim);
-
-        i = posicaoInicio;
-        j = metadeTamanho + 1;
-        k = 0;
-
-    while(i < metadeTamanho + 1 || j  < posicaoFim + 1) {
-        if (i == metadeTamanho + 1 ) { 
-            vetorTemp[k] = vetor[j];
-            j++;
-            k++;
-        }
-        else {
-            if (j == posicaoFim + 1) {
-                vetorTemp[k] = vetor[i];
-                i++;
-                k++;
-            }
-            else {
-                if (vetor[i] < vetor[j]) {
-                    vetorTemp[k] = vetor[i];
-                    i++;
-                    k++;
-                }
-                else {
-                    vetorTemp[k] = vetor[j];
-                    j++;
-                    k++;
-                }
-            }
-        }
-
-    }
-    for(i = posicaoInicio; i <= posicaoFim; i++) {
-        vetor[i] = vetorTemp[i - posicaoInicio];
-    }
-    return vetor;
+        int mid = (low+high)/2;
+        MergeSort(array, low, mid);
+        MergeSort(array, mid+1, high);
+        array = merge(array, low, mid, high);
+        return array;
 }
-    
-    static void PreencheVetorAuxiliarAleatorio(){
-        int posicao =0;
-        for(int i=0; i< matriz_saida.length; i++){
-            for(int j=0;j<matriz_saida[i].length; j++){
-                vetor_auxiliar.add(i+""+j); 
-            }
-        }
-        
-        //System.out.println("antes de embaralhar: " + vetor_auxiliar.toString());
-        Collections.shuffle(vetor_auxiliar);
-        //System.out.println("depois de embaralhar: " + vetor_auxiliar.toString());
+    public static int[] merge(int[] array, int low, int mid, int high) {
 
-    }
-    static void PrintaVetor(String m1[]){
-            for (int n = 0; n < m1.length; n++) 
-           {
-                System.out.print(m1[n]);
-                System.out.println();
-            }
-            
-        }
+    int leftArray[] = new int[mid - low + 1];
+    int rightArray[] = new int[high - mid];
+
+
+    for (int i = 0; i < leftArray.length; i++)
+        leftArray[i] = array[low + i];
+    for (int i = 0; i < rightArray.length; i++)
+        rightArray[i] = array[mid + i + 1];
+
+   
+    int leftIndex = 0;
+    int rightIndex = 0;
+
     
+    for (int i = low; i < high + 1; i++) {
+       
+        if (leftIndex < leftArray.length && rightIndex < rightArray.length) {
+            if (leftArray[leftIndex] < rightArray[rightIndex]) {
+               array[i] = leftArray[leftIndex];
+               leftIndex++;
+            } else {
+                array[i] = rightArray[rightIndex];
+                rightIndex++;
+            }
+        } else if (leftIndex < leftArray.length) {
+           
+            array[i] = leftArray[leftIndex];
+            leftIndex++;
+        } else if (rightIndex < rightArray.length) {
+          
+            array[i] = rightArray[rightIndex];
+            rightIndex++;
+        }
+    }
+    return array;
+}
+   
+
+    public static void PrintaVet(int m1[])
+    {
+        for (int n = 0; n < m1.length; n++) 
+            {
+                System.out.print(m1[n] + " ");
+            }
+            System.out.println();
+    }
     
     public static void main(String[] args) 
     {
-
+        
+        long time1MatrizEntrada;
+        long time2MatrizEntrada;
+        long time1MatrizSaida;
+        long time2MatrizSaida; 
         long time1Total;
         long time2Total;
-        long time3Total;
-        long time4Total;
-        
-        
+        long time1MatrizOrdenacao;
+        long time2MatrizOrdenacao; 
         int escolha = 0;
-        do{
+   
             Scanner in = new Scanner(System.in);
             System.out.println("Escolha uma das formas de entrada da matriz." + "");
             System.out.println("1- Preenchimento linha.");
@@ -391,38 +240,67 @@ public class SOMatrizesSequencial {
             escolha = in.nextInt();
             switch(escolha){
                 case 1:
-                    time1Total = System.currentTimeMillis();
-                    PreenchimentoLinhaMatrizEntrada();
-                    PreenchimentoMatrizSaida();
-                    time2Total = System.currentTimeMillis();
+            //        Printa(matriz_entrada);
+              //      System.out.println("---------------");
+                    System.out.println("Preenchimento do tipo linha");
+                        time1Total = System.currentTimeMillis();
+                        time1MatrizEntrada = System.currentTimeMillis();
+                        PreenchimentoLinhaMatrizEntrada();
+                        time2MatrizEntrada = System.currentTimeMillis();
+                //    Printa(matriz_entrada);
+                  //  System.out.println("---------------");
+                    System.out.println("Tempo de Execução da matriz da entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
+                        time1MatrizSaida = System.currentTimeMillis();
+                            PreenchimentoMatrizSaida();
+                        time2MatrizSaida = System.currentTimeMillis();
+                    //    Printa(matriz_saida);
+   
+                   // System.out.println("---------------");
+                     //   Printa(matriz_entrada);
+                        System.out.println("---------------------------");
+                    System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
+                        time1MatrizOrdenacao = System.currentTimeMillis(); 
+                            vet = ConverteMatriz(matriz_saida);
+                            vet = MergeSort(vet, 0,(n_colunas * n_linhas)-1 );
+                            matriz_saida = ConverteVetor(vet);
+                        time2MatrizOrdenacao = System.currentTimeMillis();
+                        time2Total = System.currentTimeMillis();
+                       // Printa(matriz_saida);
+                    System.out.println("Tempo de Execução da Ordenação:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
                     System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
-                    //Printa(matriz_entrada);
-                    //Printa(matriz_saida);
                     break;
-                case 2:   
-                    time1Total = System.currentTimeMillis();
-                    
-                    //System.out.println("VETOR PREENCHIDO ALEATORIAMENTE");
-                                        
-              
-                    PreenchimentoAleatorio();
-                    time2Total = System.currentTimeMillis();
+                case 2:
+                     // Printa(matriz_entrada);
+                      //System.out.println("---------------");
+                    System.out.println("Preenchimento do tipo aleatório");
+                        time1Total = System.currentTimeMillis();
+                        time1MatrizEntrada = System.currentTimeMillis();
+                            PreenchimentoAleatorio();
+                        time2MatrizEntrada = System.currentTimeMillis();
+                       // Printa(matriz_entrada);
+                      //System.out.println("---------------");
+                        System.out.println("Tempo de Execução Matriz Entrada:" + (time2MatrizEntrada - time1MatrizEntrada) + " milissegundos");
+                        time1MatrizSaida = System.currentTimeMillis();
+                        PreenchimentoMatrizSaida();
+                        time2MatrizSaida = System.currentTimeMillis();
+                       // Printa(matriz_entrada);
+                      //System.out.println("---------------");
+                      //Printa(matriz_saida);
+                     // System.out.println("---------------");
+                    System.out.println("Tempo de Execução Matriz Saida:" + (time2MatrizSaida - time1MatrizSaida) + " milissegundos");
+                   
+                        time1MatrizOrdenacao = System.currentTimeMillis();
+                            vet = ConverteMatriz(matriz_saida);
+                            vet = MergeSort(vet, 0, (n_colunas * n_linhas)-1);
+                            matriz_saida = ConverteVetor(vet);
+                        time2MatrizOrdenacao = System.currentTimeMillis();
+                    System.out.println("Tempo de Execução Ordenacao da matriz:" + (time2MatrizOrdenacao - time1MatrizOrdenacao) + " milissegundos");
+                        time2Total = System.currentTimeMillis();
                     System.out.println("Tempo de Execução Total:" + (time2Total - time1Total) + " milissegundos");
-                    
-                    System.out.println("terminou");
-                    time3Total = System.currentTimeMillis();
-                    PreencheVetorAuxiliarAleatorio();
-                    
-                    PreenchimentoAleatorioVetorAuxiliar();
-                    
-                    
-                    //PreenchimentoMatrizSaida();
-                    //vet = ConverteMatriz(matriz_saida);
-                    //vet = MergeSort(vet, 0, ((n_colunas * n_linhas) -1));
-                    //matriz_saida = ConverteVetor(vet);
-                    time4Total = System.currentTimeMillis();
-                    System.out.println("Tempo de Execução Total:" + (time4Total - time3Total) + " milissegundos");
-                    //Printa(matriz_entrada);
+                   //Printa(matriz_entrada);
+                     // System.out.println("---------------");
+                     // Printa(matriz_saida);
+                     // System.out.println("---------------");
                     break;
                 case 0:
                     break;
@@ -431,6 +309,6 @@ public class SOMatrizesSequencial {
                     break;
             }
                          
-        }while(escolha != 0);
+   
   }
     }

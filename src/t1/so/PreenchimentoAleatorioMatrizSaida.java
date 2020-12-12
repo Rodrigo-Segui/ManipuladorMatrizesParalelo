@@ -11,25 +11,21 @@ import java.util.concurrent.Semaphore;
  *
  * @author user
  */
-public class PreenchimentoLinhaMatrizSaida extends Thread{
+public class PreenchimentoAleatorioMatrizSaida extends Thread{
         private int [][]matriz_entrada;
         private int [][]matriz_saida;
         private int inlinha;
         private int outlinha;
         private String nome;
-        private Semaphore mutex;
-        private Semaphore semaphore;
         private int num_thread;
 
-    public PreenchimentoLinhaMatrizSaida(String nome,int num_thread, int [][]matriz_entrada, int [][]matriz_saida, int inlinha, int outlinha, Semaphore semaphore, Semaphore mutex ) {
+    public PreenchimentoAleatorioMatrizSaida(String nome,int num_thread, int [][]matriz_entrada, int [][]matriz_saida, int inlinha, int outlinha) {
 
         this.nome = nome;
         this.matriz_entrada = matriz_entrada;
         this.matriz_saida = matriz_saida;
         this.inlinha = inlinha;
         this.outlinha = outlinha;
-        this.mutex = mutex;
-        this.semaphore = semaphore;
         this.num_thread = num_thread;
         
     }
@@ -37,7 +33,7 @@ public class PreenchimentoLinhaMatrizSaida extends Thread{
     
     
     
-   void PreenchimentoLinhaMatrizSaida()
+   void PreenchimentoAleatorioSaida()
     {
         
         for(int i=inlinha;i<outlinha;i++)
@@ -55,22 +51,17 @@ public class PreenchimentoLinhaMatrizSaida extends Thread{
    
    
        public void run(){
-        try{
-            semaphore.acquire();
-            mutex.acquire();
+ 
+  
             
             System.out.println(nome +""+ num_thread + "   Iniciou");
-            PreenchimentoLinhaMatrizSaida();
-          
+            
+          PreenchimentoAleatorioSaida();
             
             System.out.println(nome +""+ num_thread + "   Terminou");
-        } catch(InterruptedException e){
-            e.printStackTrace();
-        }finally{
-            mutex.release();
-            semaphore.release();
+ 
       
-    }
+
               
         
        

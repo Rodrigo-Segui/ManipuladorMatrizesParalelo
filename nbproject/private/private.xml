@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/user/Documentos/github/ManipuladorMatrizesParalelo/src/t1/so/SOMatrizesSequencial.java</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/nbproject/build-impl.xml</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/src/t1/so/PreenchimentoLinhaMatrizSaida.java</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/src/t1/so/SOMatrizesParalelo.java</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/src/t1/so/SOMatrizesSequencial.java</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/src/t1/so/PreenchimentoAleatorioMatrizSaida.java</file>
+            <file>file:/home/user/Vídeos/Versao_enviar/ULTIMAVERSAO/ManipuladorMatrizesParalelo/src/t1/so/PreenchimentoAleatorioMatrizEntrada.java</file>
         </group>
     </open-files>
 </project-private>

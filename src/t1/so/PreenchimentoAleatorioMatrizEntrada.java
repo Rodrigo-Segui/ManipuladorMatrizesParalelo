@@ -7,22 +7,32 @@ package t1.so;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-import sun.jvm.hotspot.runtime.Threads;
+import java.lang.Thread;
 
-/**
+
+import static t1.so.SOMatrizesSequencial.matriz_entrada;
+import static t1.so.SOMatrizesSequencial.n_linhas;
+import static t1.so.SOMatrizesSequencial.shuffle;
+
+/** 
  *
  * @author user
  */
-public class PreenchimentoAleatorioMatrizEntrada extends Threads {
+public class PreenchimentoAleatorioMatrizEntrada extends Thread {
         private int [][]matriz_entrada;
         private int inlinha;
         private int outlinha;
         private String nome;
-        private Semaphore mutex;
+        private Semaphore mutex;  //CODIGO VELASCO EBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         private Semaphore semaphore;
         private int num_thread;
+        private int []linha_vet;
+        private int []coluna_vet;
+     
+         
     
-        public PreenchimentoAleatorioMatrizEntrada(String nome,int num_thread, int [][]matriz_entrada, int inlinha, int outlinha, Semaphore semaphore, Semaphore mutex) {
+        public PreenchimentoAleatorioMatrizEntrada(String nome,int num_thread,int inlinha, int outlinha, int [][]matriz_entrada, int []linha_vet, int []coluna_vet, Semaphore semaphore, Semaphore mutex) {
+
         this.nome = nome;
         this.matriz_entrada = matriz_entrada;
         this.inlinha = inlinha;
@@ -30,63 +40,53 @@ public class PreenchimentoAleatorioMatrizEntrada extends Threads {
         this.mutex = mutex;
         this.semaphore = semaphore;
         this.num_thread = num_thread;
+        this.linha_vet = linha_vet;
+        this.coluna_vet = coluna_vet;
     
     }
     
                 
     //FUNCAO VERIFICA DE POSICAO DA MATRIZ JA FOI PREENCHIIDA
-    //RETURN TRUE SE POSICAO AINDA NAO FOI PREENCHIDA
-    //RETURN FALSE SE POSICAOJA FOI PREENCHIDA
-    boolean VerificaPosicaoVazia(int linha, int coluna, int m[][])
-    {
-        int numero = 0;
-        numero = m[linha][coluna];
-        if(numero == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    
+
     
    //FUNCÃO PREENCHIMENTO ALEATORIO
-    void PreenchimentoAleatorio()
+    void PreenchimentoAleatorioMatrizEntrada()
     {
-        
-        
-        boolean teste;
-        int linha;
-        int coluna;
-        int contador=0;
+         
         int numero_sorteado = 0;
         Random random = new Random();
-        Random sorteio_linha = new Random();
-        Random sorteio_coluna = new Random();
-        while(contador<(matriz_entrada[0].length * matriz_entrada[1].length))
+        for(int u= inlinha;u< outlinha ;u++)
         {
-                //sorteia linha e coluna 
-                linha = sorteio_linha.nextInt(10); 
-                coluna = sorteio_coluna.nextInt(10);
-                
-                //verifica se posicao da matriz_entrada esta vazia
-                teste = VerificaPosicaoVazia(linha,coluna,matriz_entrada);
-                if(teste==true)
-                {
+            for(int t=0;t<matriz_entrada.length;t++)
+            {
                     numero_sorteado = random.nextInt(99)+1;
-                    matriz_entrada[linha][coluna] = numero_sorteado;
-                    System.out.println("Matriz Entrada Preenchida" +" "+ "Numero inserido na matriz = " + " " + numero_sorteado + " " + "Linha = " + " " + linha + " " + "coluna = " + coluna);
-                    //Printa(matriz_entrada);
-                    contador++;
-                }
+                    matriz_entrada[linha_vet[u]][coluna_vet[t]] = numero_sorteado;
+                    
+                    
+            }
+        
+         
         }
-        System.out.println("Print da Matriz Final de Entrada");
-       // Printa(matriz_entrada);
+}
+       
+    
+    
+        @Override
+    public void run(){
+
+            System.out.println(nome +""+ num_thread + " Iniciou");
+         PreenchimentoAleatorioMatrizEntrada();
+        System.out.println(nome +""+ num_thread + " Terminou");
+        
+  }
+   
+         
+            
         
     }
     
+
     
-}
+    
+
+        
